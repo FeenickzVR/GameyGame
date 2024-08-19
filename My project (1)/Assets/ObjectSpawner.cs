@@ -29,14 +29,8 @@ public class ObjectSpawner : MonoBehaviour
         {
             //Creating the object
             timer = Time.time + betweenSpawn;
-            //while (betweenSpawn >= 0)
-            //{
-                //while (counter > spawnrate) {
-                    spawner();
-                //}
-                //spawnrate++;
-            //}
-            //betweenSpawn = betweenSpawnStart;
+            spawner();
+                
         }
     }
 
