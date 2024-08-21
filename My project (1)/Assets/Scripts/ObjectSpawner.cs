@@ -31,16 +31,17 @@ public class ObjectSpawner : MonoBehaviour
         if(Time.time > timer)
         {
             //Creating the object
-            timer = Time.time + betweenSpawn;
+            
             spawner();
-                
+            timer = Time.time + betweenSpawn;
+
         }
     }
 
     void spawner()
     {
 
-        while (spawnrate >= counter)
+        while (wave >= counter)
         {
             float xSpawn = Random.Range(player.transform.position.x - deviation, player.transform.position.x + deviation);
             Instantiate(projectile, new Vector2(xSpawn, transform.position.y), projectile.transform.rotation);
