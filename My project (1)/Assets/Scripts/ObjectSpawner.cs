@@ -21,19 +21,19 @@ public class ObjectSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = Time.time + betweenSpawn;
+        timer = Time.time;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time > timer)
+        if(Time.time <= timer)
         {
             //Creating the object
             
             spawner();
-            timer = Time.time + betweenSpawn;
+            timer = Time.time;
 
         }
     }
@@ -48,13 +48,13 @@ public class ObjectSpawner : MonoBehaviour
             counter++;
         }
         betweenSpawn -= exponential;
-        if(betweenSpawn <= 0)
+        if(betweenSpawn >= 15)
         {
             betweenSpawn = betweenSpawnStart - (wave/1.23f);
             wave++;
             spawnrate++;
             rb.gravityScale = rb.gravityScale * 1.12f;
-            timer = Time.time + betweenSpawn;
+            timer = Time.time - betweenSpawn;
         }
         counter = 0;
     }
