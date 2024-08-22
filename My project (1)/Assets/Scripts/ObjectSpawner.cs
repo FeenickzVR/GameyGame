@@ -54,7 +54,7 @@ public class ObjectSpawner : MonoBehaviour
             wave++;
             spawnrate++;
             rb.gravityScale = rb.gravityScale * 1.12f;
-            
+            timer = Time.time + betweenSpawn;
         }
         counter = 0;
     }
