@@ -7,7 +7,7 @@ public class WaveCounter : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI waveText;
-    int waveCount;
+    int waveCount = 1;
     [SerializeField] float waveTimer;
 
     // Start is called before the first frame update
@@ -28,4 +28,6 @@ public class WaveCounter : MonoBehaviour
         }
         waveText.text = "Wave: " + waveCount;
     }
+
+    
 }
