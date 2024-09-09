@@ -1,63 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
 
-    [SerializeField]GameObject player;
-    const float betweenSpawnStart = 3f;
-    float betweenSpawn = betweenSpawnStart;
-    float timer;
-    float deviation = 3f;
-    float exponential = 0.5f;
-    int counter = 0;
-    int spawnrate = 0;
-    public static int wave = 1;
-    [SerializeField]GameObject projectile;
-    [SerializeField]Rigidbody2D rb;
+    [SerializeField] private float spawnRate = 1f;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject enemyPrefabs;
+    [SerializeField] private bool canSpawn = true;
+    float x;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = Time.time;
-
+        StartCoroutine(Spawner());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time <= timer)
-        {
-            //Creating the object
-            
-            spawner();
-            timer = Time.time;
-
-        }
+        
     }
 
-    void spawner()
+    private IEnumerator Spawner()
     {
+        WaitForSeconds wait = new WaitForSeconds(spawnRate);
 
-        while (wave >= counter)
+        while (canSpawn)
         {
-            float xSpawn = Random.Range(player.transform.position.x - deviation, player.transform.position.x + deviation);
-            Instantiate(projectile, new Vector2(xSpawn, transform.position.y), projectile.transform.rotation);
-            counter++;
+            yield return wait;
+
+            x = player.transform.position.x;
+
+            Vector2 spawnPos = new Vector2(Random.Range(x - 4, x + 4f), 5);
+            Instantiate(enemyPrefabs, spawnPos, Quaternion.identity);
         }
-        betweenSpawn -= exponential;
-        if(betweenSpawn >= 15)
-        {
-            betweenSpawn = betweenSpawnStart - (wave/1.23f);
-            wave++;
-            spawnrate++;
-            rb.gravityScale = rb.gravityScale * 1.12f;
-            timer = Time.time - betweenSpawn;
-        }
-        counter = 0;
     }
-
-
 }
